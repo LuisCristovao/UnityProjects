@@ -6,11 +6,21 @@ public class BalancePlate : MonoBehaviour {
     public GameObject Ball;
     private Vector3 actual_state, prev_state;
     private BalanceBrain brain;
+    public bool Learn = true;
+    public bool Load = false;
+    public bool Save = true;
     // Use this for initialization
     void Start () {
         actual_state = Ball.transform.position;
         prev_state = actual_state;
-        brain = new BalanceBrain();
+        if (!Load)
+        {
+            brain = new BalanceBrain();
+        }
+        else
+        {
+            //load trained brain
+        }
     }
 	void Rotate(Vector3 rotation)
     {
@@ -56,19 +66,39 @@ public class BalancePlate : MonoBehaviour {
 
 
 
-    
+    double time = 0;
+    public float rand = 0.2f;
 	// Update is called once per frame
 	void Update () {
-        actual_state = Ball.transform.position;
-        Vector3 action = brain.DoAction(actual_state, 0.1f);
-        Debug.Log(this.transform.eulerAngles);
-        Rotate(action);
-        Debug.Log(EvaluateAction());
-        if (EvaluateAction())
+        if (Learn)
         {
-            brain.SaveState(actual_state, action);
-        }
+            //time += Time.deltaTime;
+            //if (time > 0.05f)
+            //{
+                time = 0;
+                actual_state = Ball.transform.position;
+                Vector3 action = brain.DoAction(actual_state, rand);
+                Debug.Log(this.transform.eulerAngles);
+                Rotate(action);
+                Debug.Log(EvaluateAction());
+                if (EvaluateAction())
+                {
+                    brain.SaveState(actual_state, action);
+                }
 
-        prev_state = actual_state;
+                prev_state = actual_state;
+            //}
+        }
+        //
+        else
+        {
+
+        }
 	}
+
+    //public void OnApplicationQuit()
+    //{
+    //    if 
+    //}
+
 }

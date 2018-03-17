@@ -2,7 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//using System;
+
+//[Serializable]
 public class BalanceBrain {
+   // [Serializable]
     class Actions
     {
         public Dictionary<Vector3, int> actions;
