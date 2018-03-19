@@ -5,22 +5,30 @@ using UnityEngine;
 //using System;
 
 //[Serializable]
-public class BalanceBrain {
-   // [Serializable]
-    class Actions
+public class BalanceBrain
+{
+    // [Serializable]
+    public class Memory
     {
-        public Dictionary<Vector3, int> actions;
-        public Actions()
+        public Vector3 ball_pos, plate_angles;
+        public float[] action;
+        public int memory_colections;
+        public Memory(Vector3 ball_state, float[] action)
         {
-            //key-> plate rotation; value-> reward
-            actions = new Dictionary<Vector3, int>();
+            this.ball_pos = ball_state;
+            //this.plate_angles = plate_state;
+            this.action = action;
+            this.memory_colections = 0;
         }
     }
     //key=ball position 
-    Dictionary<Vector3, Actions> brain;
-    public BalanceBrain()
+    public List<Memory> brain;
+    int memory_capacity, actual_brain_capacity = 0;
+    public BalanceBrain(int brain_size)
     {
-        brain = new Dictionary<Vector3, Actions>();
+        brain = new List<Memory>();
+        memory_capacity = brain_size;
+
     }
 
     Vector3 Difference(Vector3 pos1, Vector3 pos2)
@@ -31,131 +39,124 @@ public class BalanceBrain {
         dz = Mathf.Abs(pos1.z - pos2.z);
         return new Vector3(dx, dy, dz);
     }
+    Vector3 LocalAverege(Vector3 one, Vector3 two)
+    {
 
+        float x_average, y_average, z_average;
+        x_average = (one.x + two.x) / 2;
+        y_average = (one.y + two.y) / 2;
+        z_average = (one.z + two.z) / 2;
+
+        return new Vector3(x_average, y_average, z_average);
+    }
+    float[] LocalAverege2(float[] one, float[] two)
+    {
+
+        float op1_average, op2_average, op3_average, op4_average;
+        op1_average = (one[0] + two[0]) / 2;
+        op2_average = (one[1] + two[1]) / 2;
+        op3_average = (one[2] + two[2]) / 2;
+        op4_average = (one[3] + two[3]) / 2;
+        return new float[] { op1_average, op2_average, op3_average, op4_average };
+    }
 
     //Make random action
-    Vector3 MakeRandomAction()
+    float[] MakeRandomAction()
     {
-        float rotx, roty, rotz;
-        rotx = Random.value * 2;
-        roty = Random.value * 2;
-        rotz = Random.value * 2;
-        
-        return new Vector3 (rotx,roty,rotz);
+        float op1, op2, op3,op4;
+        op1 = Random.value * 1;
+        op2 = Random.value * 1;
+        op3 = Random.value * 1;
+        op4 = Random.value * 1;
+        return new float[] { op1,op2,op3,op4};
     }
 
 
     //saves state in brain
-    public void SaveState(Vector3 state, Vector3 action)
+    public void SaveState(Vector3 ball_state, float[] action)
     {
-        //already contains state
-        if (brain.ContainsKey(state))
+        //if brain is not full
+        //fill it
+        if (actual_brain_capacity < memory_capacity)
         {
-            Actions actions = brain[state];
-            //See if action is already saved!
-            if (actions.actions.ContainsKey(action))
-            {
-                //increase reward value from action
-                int reward = actions.actions[action];
-                reward++;
-                actions.actions[action] = reward;
-            }
-            else
-            {
-                //add new action
-                actions.actions[action] = 1;
-            }
+            brain.Add(new Memory(ball_state, action));
         }
+        //find nearest neigbour and place it there by making an averege of results
+        //in that position
         else
         {
-            Actions actions = new Actions();
-            actions.actions.Add(action, 1);
-            brain.Add(state, actions);
+            int near_state_index = SelectNearestState(ball_state);
+            Memory m = brain[near_state_index];
+            //Make average of the new knowledge with old one
+            m.ball_pos = LocalAverege(m.ball_pos, ball_state);
+            m.action = LocalAverege2(m.action, action);
         }
+
     }
     //returns nearest state in brain from received state
-    Vector3 SelectNearestState(Vector3 state)
+    int SelectNearestState(Vector3 state)
     {
-        //see if there is exactly the same state
-        if (brain.ContainsKey(state))
-        {
-            return state;
-        }
-        //Select nearest "neighbour"
-        else
-        {
-            float min_distance = Mathf.Infinity;
-            //Probably need to change this
-            Vector3 nearest_state = new Vector3(0, 0, 0);
-            foreach (KeyValuePair<Vector3, Actions> entry in brain)
-            {
-                // do something with entry.Value or entry.Key
-                //measure distance
-                float distance = Mathf.Sqrt(Mathf.Pow(entry.Key.x, 2) + Mathf.Pow(entry.Key.y, 2) + Mathf.Pow(entry.Key.z, 2));
 
-                //see the lowest distance
-                if (distance < min_distance)
-                {
-                    min_distance = distance;
-                    nearest_state = entry.Key;
-                }
+        float min_distance = Mathf.Infinity;
+        //Probably need to change this
+        int nearest_state = 0;
+        for (int i = 0; i < brain.Count; i++)
+        {
+            Memory entry = brain[i];
+            //difference between states
+            Vector3 dif_vector = Difference(state, entry.ball_pos);
+            //measure distance of dif_vetor
+            float distance = Mathf.Sqrt(Mathf.Pow(dif_vector.x, 2) + Mathf.Pow(dif_vector.y, 2) + Mathf.Pow(dif_vector.z, 2));
+            //find lowest distance, meaning nearest neighbour
+            if (min_distance > distance)
+            {
+                min_distance = distance;
+                nearest_state = i;
+
             }
-            return nearest_state;
         }
+        return nearest_state;
+
     }
     //select action with best reward
-    Vector3 SelectBestAction(Vector3 state)
+    float[] SelectBestAction(Vector3 state)
     {
-        Actions a = brain[state];
-        int max = 0, i = 0;
-        Vector3 selected_action = new Vector3 (0,0,0);
-        foreach (KeyValuePair<Vector3, int> entry in a.actions)
+        //if brain empty
+        if (brain.Count == 0)
         {
-            if (i == 0)
-            {
-                max = entry.Value;
-                i++;
-                selected_action = entry.Key;
-            }
-            else
-            {
-                if (entry.Value > max)
-                {
-                    max = entry.Value;
-                    selected_action = entry.Key;
-                }
-            }
+            return MakeRandomAction();
         }
-        return selected_action;
+        //Select nearest memory
+        else
+        {
+            int nearest_memory_index = SelectNearestState(state);
+            Memory m = brain[nearest_memory_index];
+            return m.action;
+        }
+
     }
     //For some state do action
     //state is the difference vector between droid and position
-    public Vector3 DoAction(Vector3 state, float random_action_percentage)
+    public float[] DoAction(Vector3 state, float random_action_percentage)
     {
         //if dictionary is empty
-        if (brain.Count == 0)
+
+        float n = Random.value;
+
+        if (n <= random_action_percentage)
         {
-            //Random Play
             return MakeRandomAction();
         }
         else
         {
-            float n = Random.value;
 
-            if (n <= random_action_percentage)
-            {
-                return MakeRandomAction();
-            }
-            else
-            {
-                Vector3 nearest_state = SelectNearestState(state);
-                Vector3 action = SelectBestAction(nearest_state);
-                return action;
-            }
-
+            float[] action = SelectBestAction(state);
+            return action;
         }
-
 
     }
 
+
 }
+
+
