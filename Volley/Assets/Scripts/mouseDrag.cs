@@ -18,13 +18,14 @@ public class mouseDrag : MonoBehaviour
         transform.position = objectPos;
 
        // Debug.Log("MousePos:"+mousePos);
-        Debug.Log("objectPos:"+objectPos);
+        //Debug.Log("objectPos:"+objectPos);
         //Debug.Log("transform:"+transform.position);
     }
 
 
     void OnMouseUp()
     {
-        Debug.Log("objectPos:" + objectPos);
+        //Debug.Log("objectPos:" + objectPos);
     }
+
 }
