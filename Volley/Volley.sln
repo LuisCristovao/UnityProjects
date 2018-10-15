@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2017
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Volley", "Volley.csproj", "{3EEA18BF-D7E9-231B-8AD7-11255BE7BBDD}"
+# Visual Studio 15
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Volley", "Assembly-CSharp.csproj", "{41798685-356F-F003-B5DB-79811EBDC084}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,10 +9,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{3EEA18BF-D7E9-231B-8AD7-11255BE7BBDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3EEA18BF-D7E9-231B-8AD7-11255BE7BBDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3EEA18BF-D7E9-231B-8AD7-11255BE7BBDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3EEA18BF-D7E9-231B-8AD7-11255BE7BBDD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{41798685-356F-F003-B5DB-79811EBDC084}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{41798685-356F-F003-B5DB-79811EBDC084}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{41798685-356F-F003-B5DB-79811EBDC084}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{41798685-356F-F003-B5DB-79811EBDC084}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
