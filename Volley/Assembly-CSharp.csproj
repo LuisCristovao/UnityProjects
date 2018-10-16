@@ -61,11 +61,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Ball.cs" />
-    <Compile Include="Assets\Scripts\FallingBalls.cs" />
-    <Compile Include="Assets\Scripts\Menu.cs" />
-    <Compile Include="Assets\Scripts\mouseDrag.cs" />
-    <Compile Include="Assets\Scripts\Player.cs" />
+    <Compile Include="Assets\Menu\Scripts\FallingBalls.cs" />
+    <Compile Include="Assets\Menu\Scripts\Menu.cs" />
+    <Compile Include="Assets\VolleyGame\Scripts\Ball.cs" />
+    <Compile Include="Assets\VolleyGame\Scripts\mouseDrag.cs" />
+    <Compile Include="Assets\VolleyGame\Scripts\Player.cs" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>C:/Users/Samsung/Documents/GitHub/UnityProjects/Volley/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>
