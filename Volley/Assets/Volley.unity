@@ -265,6 +265,11 @@ Prefab:
       propertyPath: help_walk_force
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 50464427387347602, guid: 8138bd674d4c5f04ba11c37a633be2ec,
+        type: 2}
+      propertyPath: m_Interpolate
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8138bd674d4c5f04ba11c37a633be2ec, type: 2}
   m_IsPrefabParent: 0
@@ -724,6 +729,11 @@ Prefab:
       propertyPath: help_walk_force
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 50703743955459006, guid: 679f75b194a27f4469565404677a184a,
+        type: 2}
+      propertyPath: m_Interpolate
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 679f75b194a27f4469565404677a184a, type: 2}
   m_IsPrefabParent: 0
@@ -949,6 +959,11 @@ Prefab:
       propertyPath: m_TagString
       value: Untagged
       objectReference: {fileID: 0}
+    - target: {fileID: 50027842498885578, guid: f587f175f5c736a49a2844b1d92e4c29,
+        type: 2}
+      propertyPath: m_Interpolate
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f587f175f5c736a49a2844b1d92e4c29, type: 2}
   m_IsPrefabParent: 0
@@ -969,6 +984,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   game_result: {fileID: 1570098186}
+  winning_matches: 10
 --- !u!1 &1898467493
 GameObject:
   m_ObjectHideFlags: 0

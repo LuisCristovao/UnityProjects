@@ -13,6 +13,7 @@ public class Ball : MonoBehaviour {
 	void Start () {
         start_pos = transform.position;
         rb = gameObject.GetComponent<Rigidbody2D>();
+        Time.timeScale = 0.1f;
 	}
 	
 	// Update is called once per frame

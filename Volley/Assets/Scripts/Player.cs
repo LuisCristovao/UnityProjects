@@ -22,7 +22,7 @@ public class Player : MonoBehaviour {
     void Start () {
         rb = gameObject.GetComponent<Rigidbody2D>();
         on_air = false;
-
+        Time.timeScale = 0.1f;
     }
 	
 	// Update is called once per frame
@@ -75,4 +75,13 @@ public class Player : MonoBehaviour {
 
         }
     }
+
+    /*private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.tag == "jumpable")
+        {
+            on_air = true;
+            print(on_air);
+        }
+    }*/
 }
