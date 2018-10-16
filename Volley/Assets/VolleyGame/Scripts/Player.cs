@@ -17,16 +17,19 @@ public class Player : MonoBehaviour {
     public GameObject floor;
 
     private bool on_air;
-
+    //public float timespeed = 1.0f;
     // Use this for initialization
     void Start () {
         rb = gameObject.GetComponent<Rigidbody2D>();
         on_air = false;
-
+        
     }
 	
 	// Update is called once per frame
 	void Update () {
+
+        //Time.timeScale = timespeed;
+
         if (Input.GetKeyDown(jump_key) && !on_air)
         {
             rb.AddForce(new Vector2(0, jump_force));

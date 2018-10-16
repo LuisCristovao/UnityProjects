@@ -9,16 +9,18 @@ public class Ball : MonoBehaviour {
     public Text game_result;
     Rigidbody2D rb;
     public int winning_matches = 10;
+    public float timespeed = 1.0f;
 	// Use this for initialization
 	void Start () {
         start_pos = transform.position;
         rb = gameObject.GetComponent<Rigidbody2D>();
-	}
+        
+    }
 	
 	// Update is called once per frame
 	void Update () {
-		
-	}
+        Time.timeScale = timespeed;
+    }
 
     void ChangeResult(string team,int point)
     {
