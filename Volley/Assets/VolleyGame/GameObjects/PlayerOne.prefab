@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 114399702338389210}
   m_Layer: 0
   m_Name: PlayerOne
-  m_TagString: Untagged
+  m_TagString: jumpable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -59,7 +59,7 @@ Rigidbody2D:
   m_AngularDrag: 0.05
   m_GravityScale: 4
   m_Material: {fileID: 0}
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
@@ -100,8 +100,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jump_force: 1000
-  walk_force: 200
-  help_walk_force: 100
+  walk_force: 10
+  help_walk_force: 20
+  jump_key: up
+  left_key: left
+  right_key: right
 --- !u!212 &212880598238901504
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -115,6 +118,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
@@ -137,7 +141,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 69633784f2962c74cb95ba3e054bae31, type: 3}
-  m_Color: {r: 1, g: 0.09558821, b: 0.09558821, a: 1}
+  m_Color: {r: 0.9529412, g: 0.09833272, b: 0.011764699, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

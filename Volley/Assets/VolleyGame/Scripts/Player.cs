@@ -14,7 +14,7 @@ public class Player : MonoBehaviour {
     public string left_key = "left";
     public string right_key = "right";
 
-    public GameObject floor;
+    //public GameObject floor;
 
     private bool on_air;
     //public float timespeed = 1.0f;
