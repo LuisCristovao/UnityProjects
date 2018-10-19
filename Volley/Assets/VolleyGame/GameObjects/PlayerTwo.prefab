@@ -59,7 +59,7 @@ Rigidbody2D:
   m_AngularDrag: 0.05
   m_GravityScale: 4
   m_Material: {fileID: 0}
-  m_Interpolate: 1
+  m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
@@ -105,7 +105,6 @@ MonoBehaviour:
   jump_key: w
   left_key: a
   right_key: d
-  floor: {fileID: 0}
 --- !u!212 &212960061411469024
 SpriteRenderer:
   m_ObjectHideFlags: 1

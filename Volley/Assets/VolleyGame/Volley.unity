@@ -1089,42 +1089,19 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 50027842498885578, guid: f587f175f5c736a49a2844b1d92e4c29,
+    - target: {fileID: 114675859763910504, guid: f587f175f5c736a49a2844b1d92e4c29,
         type: 2}
-      propertyPath: m_Mass
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1335318918166008, guid: f587f175f5c736a49a2844b1d92e4c29, type: 2}
-      propertyPath: m_TagString
-      value: Untagged
-      objectReference: {fileID: 0}
-    - target: {fileID: 50027842498885578, guid: f587f175f5c736a49a2844b1d92e4c29,
+      propertyPath: game_result
+      value: 
+      objectReference: {fileID: 1570098186}
+    - target: {fileID: 114675859763910504, guid: f587f175f5c736a49a2844b1d92e4c29,
         type: 2}
-      propertyPath: m_Interpolate
-      value: 1
+      propertyPath: bounce
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f587f175f5c736a49a2844b1d92e4c29, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &1893830538 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1335318918166008, guid: f587f175f5c736a49a2844b1d92e4c29,
-    type: 2}
-  m_PrefabInternal: {fileID: 1689806687}
---- !u!114 &1893830539
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1893830538}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f0e36426e1b4dd449ecf3e4f7537231, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  game_result: {fileID: 1570098186}
-  winning_matches: 10
-  timespeed: 0
 --- !u!1 &1898467493
 GameObject:
   m_ObjectHideFlags: 0

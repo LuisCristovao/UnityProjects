@@ -42,7 +42,7 @@ public class Player : MonoBehaviour {
         {
             if (!on_air)
             {
-                rb.AddForce(new Vector2(-walk_force, help_walk_force));
+                rb.AddForce(new Vector2(-walk_force, help_walk_force*Time.timeScale));
             }
             else
             {
@@ -56,7 +56,7 @@ public class Player : MonoBehaviour {
         {
             if (!on_air)
             {
-                rb.AddForce(new Vector2(walk_force, help_walk_force));
+                rb.AddForce(new Vector2(walk_force, help_walk_force * Time.timeScale));
             }
             else
             {

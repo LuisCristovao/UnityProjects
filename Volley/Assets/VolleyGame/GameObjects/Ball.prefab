@@ -23,9 +23,10 @@ GameObject:
   - component: {fileID: 58085339821089976}
   - component: {fileID: 50027842498885578}
   - component: {fileID: 114501085075590188}
+  - component: {fileID: 114675859763910504}
   m_Layer: 0
   m_Name: Ball
-  m_TagString: jumpable
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -54,12 +55,12 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
   m_Material: {fileID: 0}
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
@@ -89,6 +90,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b91d2e7e51b1dd4d8b39e7391cccea3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114675859763910504
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1335318918166008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f0e36426e1b4dd449ecf3e4f7537231, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  game_result: {fileID: 0}
+  winning_matches: 10
+  timespeed: 0
 --- !u!212 &212393039194286502
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -102,6 +117,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
