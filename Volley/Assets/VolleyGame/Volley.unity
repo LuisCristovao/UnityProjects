@@ -1097,7 +1097,7 @@ Prefab:
     - target: {fileID: 114675859763910504, guid: f587f175f5c736a49a2844b1d92e4c29,
         type: 2}
       propertyPath: bounce
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 58085339821089976, guid: f587f175f5c736a49a2844b1d92e4c29,
         type: 2}
