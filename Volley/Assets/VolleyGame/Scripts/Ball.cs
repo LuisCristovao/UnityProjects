@@ -10,7 +10,7 @@ public class Ball : MonoBehaviour {
     Rigidbody2D rb;
     public int winning_matches = 10;
     public float timespeed = 1.0f;
-    public float bounce = 2f;
+    public float bounce = 0.8f;
 
     private float[] prev_velocity;
 
@@ -19,14 +19,20 @@ public class Ball : MonoBehaviour {
         start_pos = transform.position;
         rb = gameObject.GetComponent<Rigidbody2D>();
         prev_velocity = new float[2] { rb.velocity.x, rb.velocity.y };
-        
+        PhysicsMaterial2D ball_bounciness = new PhysicsMaterial2D("bounce");
+        ball_bounciness.bounciness = bounce;
+        ball_bounciness.friction = 0.4f;
+        gameObject.GetComponent<Collider2D>().sharedMaterial = ball_bounciness;
     }
 	
 	// Update is called once per frame
 	void Update () {
         Time.timeScale = timespeed;
         //Time.fixedDeltaTime = Time.timeScale*V;
-
+        PhysicsMaterial2D ball_bounciness = new PhysicsMaterial2D("bounce");
+        ball_bounciness.bounciness = bounce;
+        ball_bounciness.friction = 0.4f;
+        gameObject.GetComponent<Collider2D>().sharedMaterial = ball_bounciness;
         prev_velocity[0] = rb.velocity.x;
         prev_velocity[1] = rb.velocity.y;
     }
@@ -51,7 +57,7 @@ public class Ball : MonoBehaviour {
     void OnCollisionEnter2D(Collision2D col)
     {
         //print(on_air);
-        bool touch_floor = false;
+        //bool touch_floor = false;
 
         if (col.gameObject.name == "team_red_floor")
         {
@@ -59,7 +65,7 @@ public class Ball : MonoBehaviour {
             rb.velocity = new Vector2(0, 0);
             rb.angularVelocity=0f;
             ChangeResult("g", 1);
-            touch_floor = true;
+            //touch_floor = true;
             //print(transform.position);
         }
 
@@ -69,31 +75,31 @@ public class Ball : MonoBehaviour {
             rb.velocity = new Vector2(0, 0);
             rb.angularVelocity = 0f;
             ChangeResult("r", 1);
-            touch_floor = true;
+            //touch_floor = true;
             //print(transform.position);
         }
 
-        if (/*col.gameObject.name!="PlayerOne(Clone)" &&*/ !touch_floor)
-        {
-            //print(prev_velocity[1]);
-            float diffx=(col.transform.position.x-transform.position.x);
-            float diffy=(col.transform.position.y - transform.position.y);
+        //if (/*col.gameObject.name!="PlayerOne(Clone)" &&*/ !touch_floor)
+        //{
+        //    //print(prev_velocity[1]);
+        //    float diffx=(col.transform.position.x-transform.position.x);
+        //    float diffy=(col.transform.position.y - transform.position.y);
 
-            print(diffx);
+        //    print(diffx);
 
-            //if ball collided with an object above it
-            if (Mathf.Floor(diffx) ==  0)
-            {
-                rb.AddForce(new Vector2(0, -prev_velocity[1] * bounce));
-            }
-            //if ball collided with an object on the side
-            if (Mathf.Floor(diffx) != 0)
-            {
-                rb.AddForce(new Vector2(-prev_velocity[0] * bounce, 0));
-            }
+        //    //if ball collided with an object above it
+        //    if (Mathf.Floor(diffx) ==  0)
+        //    {
+        //        rb.AddForce(new Vector2(0, -prev_velocity[1] * bounce));
+        //    }
+        //    //if ball collided with an object on the side
+        //    if (Mathf.Floor(diffx) != 0)
+        //    {
+        //        rb.AddForce(new Vector2(-prev_velocity[0] * bounce, 0));
+        //    }
 
 
-        }
+        //}
 
     }
 }

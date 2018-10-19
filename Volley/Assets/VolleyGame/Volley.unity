@@ -1097,8 +1097,13 @@ Prefab:
     - target: {fileID: 114675859763910504, guid: f587f175f5c736a49a2844b1d92e4c29,
         type: 2}
       propertyPath: bounce
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 58085339821089976, guid: f587f175f5c736a49a2844b1d92e4c29,
+        type: 2}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: b7ca657a488788b4188db0787124dc12, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f587f175f5c736a49a2844b1d92e4c29, type: 2}
   m_IsPrefabParent: 0
