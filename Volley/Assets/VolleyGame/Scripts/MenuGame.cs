@@ -84,7 +84,9 @@ public class MenuGame : MonoBehaviour
 
                 {"player_two_jump_key", Instantiate(InputPrefab)},
                 {"player_two_right_key", Instantiate(InputPrefab)},
-                {"player_two_left_key", Instantiate(InputPrefab)}
+                {"player_two_left_key", Instantiate(InputPrefab)},
+
+                {"number_of_matches", Instantiate(InputPrefab)}
 
             };
 
@@ -95,38 +97,152 @@ public class MenuGame : MonoBehaviour
             }
 
 
-            input_keys["player_one_jump_key"].transform.position = new Vector3((Screen.width / 2) - 350, (Screen.height / 2) + 220, 0);
-            input_keys["player_one_jump_key"].GetComponentInChildren<Text>().text = "player one jump key";
-            input_keys["player_one_jump_key"].GetComponentInChildren<InputField>().text = "w";
-
-            input_keys["player_one_right_key"].transform.position = new Vector3((Screen.width / 2) - 350, (Screen.height / 2) + 150, 0);
-            input_keys["player_one_right_key"].GetComponentInChildren<Text>().text = "player one right key";
-            input_keys["player_one_right_key"].GetComponentInChildren<InputField>().text = "d";
-
-            input_keys["player_one_left_key"].transform.position = new Vector3((Screen.width / 2) - 350, (Screen.height / 2) + 80, 0);
-            input_keys["player_one_left_key"].GetComponentInChildren<Text>().text = "player one left key";
-            input_keys["player_one_left_key"].GetComponentInChildren<InputField>().text = "a";
+            input_keys["number_of_matches"].transform.position = new Vector2(OK.transform.position.x, OK.transform.position.y + 50);
+            input_keys["number_of_matches"].GetComponentInChildren<Text>().text = "Number of Matches";
+            input_keys["number_of_matches"].GetComponentInChildren<InputField>().text = "3";
 
 
 
-            input_keys["player_two_jump_key"].transform.position = new Vector3((Screen.width / 2) + 200, (Screen.height / 2) + 220, 0);
+            input_keys["player_two_jump_key"].transform.position = new Vector3((Screen.width / 2) - 350, (Screen.height / 2) + 220, 0);
             input_keys["player_two_jump_key"].GetComponentInChildren<Text>().text = "player two jump key";
-            input_keys["player_two_jump_key"].GetComponentInChildren<InputField>().text = "up";
+            input_keys["player_two_jump_key"].GetComponentInChildren<InputField>().text = "w";
 
-            input_keys["player_two_right_key"].transform.position = new Vector3((Screen.width / 2) + 200, (Screen.height / 2) + 150, 0);
+            input_keys["player_two_right_key"].transform.position = new Vector3((Screen.width / 2) - 350, (Screen.height / 2) + 150, 0);
             input_keys["player_two_right_key"].GetComponentInChildren<Text>().text = "player two right key";
-            input_keys["player_two_right_key"].GetComponentInChildren<InputField>().text = "right";
+            input_keys["player_two_right_key"].GetComponentInChildren<InputField>().text = "d";
 
-
-            input_keys["player_two_left_key"].transform.position = new Vector3((Screen.width / 2) + 200, (Screen.height / 2) + 80, 0);
+            input_keys["player_two_left_key"].transform.position = new Vector3((Screen.width / 2) - 350, (Screen.height / 2) + 80, 0);
             input_keys["player_two_left_key"].GetComponentInChildren<Text>().text = "player two left key";
-            input_keys["player_two_left_key"].GetComponentInChildren<InputField>().text = "left";
+            input_keys["player_two_left_key"].GetComponentInChildren<InputField>().text = "a";
+
+
+
+            input_keys["player_one_jump_key"].transform.position = new Vector3((Screen.width / 2) + 350, (Screen.height / 2) + 220, 0);
+            input_keys["player_one_jump_key"].GetComponentInChildren<Text>().text = "player one jump key";
+            input_keys["player_one_jump_key"].GetComponentInChildren<InputField>().text = "up";
+
+            input_keys["player_one_right_key"].transform.position = new Vector3((Screen.width / 2) + 350, (Screen.height / 2) + 150, 0);
+            input_keys["player_one_right_key"].GetComponentInChildren<Text>().text = "player one right key";
+            input_keys["player_one_right_key"].GetComponentInChildren<InputField>().text = "right";
+
+
+            input_keys["player_one_left_key"].transform.position = new Vector3((Screen.width / 2) + 350, (Screen.height / 2) + 80, 0);
+            input_keys["player_one_left_key"].GetComponentInChildren<Text>().text = "player one left key";
+            input_keys["player_one_left_key"].GetComponentInChildren<InputField>().text = "left";
 
 
 
 
 
         }
+
+
+        if (message == "team vs team")
+        {
+            decision = message;
+            Hide();
+            //show player vs player menu
+            btns["OK"].gameObject.SetActive(true);
+
+
+            //Create Inputs
+            input_keys = new Dictionary<string, GameObject>
+            {
+                {"player_one_jump_key", Instantiate(InputPrefab)},
+                {"player_one_right_key", Instantiate(InputPrefab)},
+                {"player_one_left_key", Instantiate(InputPrefab)},
+
+                {"player_two_jump_key", Instantiate(InputPrefab)},
+                {"player_two_right_key", Instantiate(InputPrefab)},
+                {"player_two_left_key", Instantiate(InputPrefab)},
+
+                {"player_three_jump_key", Instantiate(InputPrefab)},
+                {"player_three_right_key", Instantiate(InputPrefab)},
+                {"player_three_left_key", Instantiate(InputPrefab)},
+
+                {"player_four_jump_key", Instantiate(InputPrefab)},
+                {"player_four_right_key", Instantiate(InputPrefab)},
+                {"player_four_left_key", Instantiate(InputPrefab)},
+
+                {"number_of_matches", Instantiate(InputPrefab)}
+
+            };
+
+            //Turn Canvas GameObject as parent of the inputs
+            foreach (KeyValuePair<string, GameObject> entry in input_keys)
+            {
+                entry.Value.transform.parent = canvas.transform;
+            }
+
+
+            input_keys["number_of_matches"].transform.position = new Vector2(OK.transform.position.x,OK.transform.position.y+ 50);
+            input_keys["number_of_matches"].GetComponentInChildren<Text>().text = "Number of Matches";
+            input_keys["number_of_matches"].GetComponentInChildren<InputField>().text = "3";
+
+            input_keys["player_two_jump_key"].transform.position = new Vector3((Screen.width / 2) - 350, (Screen.height / 2) + 220, 0);
+            input_keys["player_two_jump_key"].GetComponentInChildren<Text>().text = "player two jump key";
+            input_keys["player_two_jump_key"].GetComponentInChildren<InputField>().text = "w";
+
+            input_keys["player_two_right_key"].transform.position = new Vector3((Screen.width / 2) - 350, (Screen.height / 2) + 150, 0);
+            input_keys["player_two_right_key"].GetComponentInChildren<Text>().text = "player two right key";
+            input_keys["player_two_right_key"].GetComponentInChildren<InputField>().text = "d";
+
+            input_keys["player_two_left_key"].transform.position = new Vector3((Screen.width / 2) - 350, (Screen.height / 2) + 80, 0);
+            input_keys["player_two_left_key"].GetComponentInChildren<Text>().text = "player two left key";
+            input_keys["player_two_left_key"].GetComponentInChildren<InputField>().text = "a";
+
+
+
+            input_keys["player_one_jump_key"].transform.position = new Vector3((Screen.width / 2) + 350, (Screen.height / 2) + 220, 0);
+            input_keys["player_one_jump_key"].GetComponentInChildren<Text>().text = "player one jump key";
+            input_keys["player_one_jump_key"].GetComponentInChildren<InputField>().text = "up";
+
+            input_keys["player_one_right_key"].transform.position = new Vector3((Screen.width / 2) + 350, (Screen.height / 2) + 150, 0);
+            input_keys["player_one_right_key"].GetComponentInChildren<Text>().text = "player one right key";
+            input_keys["player_one_right_key"].GetComponentInChildren<InputField>().text = "right";
+
+
+            input_keys["player_one_left_key"].transform.position = new Vector3((Screen.width / 2) + 350, (Screen.height / 2) + 80, 0);
+            input_keys["player_one_left_key"].GetComponentInChildren<Text>().text = "player one left key";
+            input_keys["player_one_left_key"].GetComponentInChildren<InputField>().text = "left";
+
+
+            //---------------------------------------
+            input_keys["player_four_jump_key"].transform.position = new Vector3((Screen.width / 2) - 350, (Screen.height / 2) - 220, 0);
+            input_keys["player_four_jump_key"].GetComponentInChildren<Text>().text = "player four jump key";
+            input_keys["player_four_jump_key"].GetComponentInChildren<InputField>().text = "b";
+
+            input_keys["player_four_right_key"].transform.position = new Vector3((Screen.width / 2) - 350, (Screen.height / 2) - 150, 0);
+            input_keys["player_four_right_key"].GetComponentInChildren<Text>().text = "player four right key";
+            input_keys["player_four_right_key"].GetComponentInChildren<InputField>().text = "n";
+
+            input_keys["player_four_left_key"].transform.position = new Vector3((Screen.width / 2) - 350, (Screen.height / 2) - 80, 0);
+            input_keys["player_four_left_key"].GetComponentInChildren<Text>().text = "player four left key";
+            input_keys["player_four_left_key"].GetComponentInChildren<InputField>().text = "v";
+
+
+            input_keys["player_three_jump_key"].transform.position = new Vector3((Screen.width / 2) + 350, (Screen.height / 2) - 220, 0);
+            input_keys["player_three_jump_key"].GetComponentInChildren<Text>().text = "player three jump key";
+            input_keys["player_three_jump_key"].GetComponentInChildren<InputField>().text = "o";
+
+            input_keys["player_three_right_key"].transform.position = new Vector3((Screen.width / 2) + 350, (Screen.height / 2) - 150, 0);
+            input_keys["player_three_right_key"].GetComponentInChildren<Text>().text = "player three right key";
+            input_keys["player_three_right_key"].GetComponentInChildren<InputField>().text = "p";
+
+            input_keys["player_three_left_key"].transform.position = new Vector3((Screen.width / 2) + 350, (Screen.height / 2) - 80, 0);
+            input_keys["player_three_left_key"].GetComponentInChildren<Text>().text = "player three left key";
+            input_keys["player_three_left_key"].GetComponentInChildren<InputField>().text = "i";
+
+
+
+
+
+
+
+        }
+
+
+
 
         if (message == "OK")
         {
@@ -149,19 +265,75 @@ public class MenuGame : MonoBehaviour
                 player_two.GetComponent<Player>().left_key = input_keys["player_two_left_key"].GetComponentInChildren<InputField>().text;
 
 
-                //Destroy inputs created
-                foreach (KeyValuePair<string, GameObject> entry in input_keys)
-                {
-                    Destroy(entry.Value);
-                }
-
-
-
-                //print(message);
-                decision = message;
-                Hide();
-                script.timespeed = 1;
+                
             }
+
+
+
+            if (decision == "team vs team")
+            {
+                GameObject player_one = Instantiate(Player, new Vector2(net_position.position.x + 1, net_position.position.y), Quaternion.identity);
+                player_one.name = "player one";
+                //player_one.GetComponent<SpriteRenderer>().color = new Color(Random.value, Random.value, Random.value,1.0f);
+                player_one.GetComponent<SpriteRenderer>().color = new Color(1.0f, 0.09558821f, 0.09558821f, 1.0f);
+                player_one.GetComponent<Player>().jump_key = input_keys["player_one_jump_key"].GetComponentInChildren<InputField>().text;
+                player_one.GetComponent<Player>().right_key = input_keys["player_one_right_key"].GetComponentInChildren<InputField>().text;
+                player_one.GetComponent<Player>().left_key = input_keys["player_one_left_key"].GetComponentInChildren<InputField>().text;
+
+                GameObject player_two = Instantiate(Player, new Vector2(net_position.position.x - 1, net_position.position.y), Quaternion.identity);
+                player_two.name = "player two";
+                //player_two.GetComponent<SpriteRenderer>().color = new Color(Random.value, Random.value, Random.value, 1.0f);
+                player_two.GetComponent<SpriteRenderer>().color = new Color(0, 0.5367647f, 0.2924442f, 1.0f); ;
+                player_two.GetComponent<Player>().jump_key = input_keys["player_two_jump_key"].GetComponentInChildren<InputField>().text;
+                player_two.GetComponent<Player>().right_key = input_keys["player_two_right_key"].GetComponentInChildren<InputField>().text;
+                player_two.GetComponent<Player>().left_key = input_keys["player_two_left_key"].GetComponentInChildren<InputField>().text;
+
+
+                //--------------------------------------
+
+                GameObject player_three = Instantiate(Player, new Vector2(net_position.position.x + 3, net_position.position.y), Quaternion.identity);
+                player_three.name = "player three";
+                //player_three.GetComponent<SpriteRenderer>().color = new Color(Random.value, Random.value, Random.value, 1.0f);
+                player_three.GetComponent<SpriteRenderer>().color = new Color(1.0f, 0.6262409f, 0.09411764f, 1.0f);
+                player_three.GetComponent<Player>().jump_key = input_keys["player_three_jump_key"].GetComponentInChildren<InputField>().text;
+                player_three.GetComponent<Player>().right_key = input_keys["player_three_right_key"].GetComponentInChildren<InputField>().text;
+                player_three.GetComponent<Player>().left_key = input_keys["player_three_left_key"].GetComponentInChildren<InputField>().text;
+
+
+                GameObject player_four = Instantiate(Player, new Vector2(net_position.position.x - 3, net_position.position.y), Quaternion.identity);
+                player_four.name = "player four";
+                //player_four.GetComponent<SpriteRenderer>().color = new Color(Random.value, Random.value, Random.value, 1.0f);
+                player_four.GetComponent<SpriteRenderer>().color = new Color(0.01348342f, 0.7637295f, 0.9528302f, 1.0f);
+                player_four.GetComponent<Player>().jump_key = input_keys["player_four_jump_key"].GetComponentInChildren<InputField>().text;
+                player_four.GetComponent<Player>().right_key = input_keys["player_four_right_key"].GetComponentInChildren<InputField>().text;
+                player_four.GetComponent<Player>().left_key = input_keys["player_four_left_key"].GetComponentInChildren<InputField>().text;
+
+
+
+
+                
+            }
+
+
+
+            GameObject.Find("Ball").GetComponent<Ball>().winning_matches = int.Parse( input_keys["number_of_matches"].GetComponentInChildren<InputField>().text);
+
+
+            //Destroy inputs created
+            foreach (KeyValuePair<string, GameObject> entry in input_keys)
+            {
+                Destroy(entry.Value);
+            }
+
+
+
+            //print(message);
+            decision = message;
+            Hide();
+            script.timespeed = 1;
+
+
+
         }
 
 

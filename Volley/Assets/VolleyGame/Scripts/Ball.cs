@@ -84,20 +84,41 @@ public class Ball : MonoBehaviour {
 
     void GameOver()
     {
-        char[] delimiters = { '|' };
-
-        string[] result = game_result.text.Split(delimiters);
-        int[] number_result = new int[] { System.Convert.ToInt32(result[0]), System.Convert.ToInt32(result[1]) };
-
-        if ((number_result[0] >= winning_matches || number_result[1] >= winning_matches) && !game_over )
+        if (!game_over)
         {
-            timespeed = 0.1f;
-            game_over = true;
+            char[] delimiters = { '|' };
+
+            string[] result = game_result.text.Split(delimiters);
+            int[] number_result = new int[] { System.Convert.ToInt32(result[0]), System.Convert.ToInt32(result[1]) };
+
+            if ((number_result[0] >= winning_matches || number_result[1] >= winning_matches) && !game_over)
+            {
+                timespeed = 0.1f;
+                game_over = true;
 
 
-            restart.gameObject.SetActive(true);
-            main_menu.gameObject.SetActive(true);
+                restart.gameObject.SetActive(true);
+                main_menu.gameObject.SetActive(true);
+
+
+                //green team
+                if (number_result[0] >= winning_matches)
+                {
+                    game_result.text = "Green Team Won!";
+                    game_result.color = new Color(0, 1, 0);
+
+                }
+                //red team
+                if (number_result[1] >= winning_matches)
+                {
+
+                    game_result.text = "Red Team Won!";
+                    game_result.color = new Color(1, 0, 0);
+                }
+
+            }
         }
+        
 
     }
 
@@ -124,6 +145,25 @@ public class Ball : MonoBehaviour {
         p2.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         p2.GetComponent<Rigidbody2D>().angularVelocity = 0f;
         p2.transform.rotation = new Quaternion(0, 0, 0, 0);
+
+
+        GameObject p3 = GameObject.Find("player three");
+        if (p3 != null)
+        {
+            p3.transform.position = new Vector2(net_position.position.x + 3, net_position.position.y);
+            p3.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            p3.GetComponent<Rigidbody2D>().angularVelocity = 0f;
+            p3.transform.rotation = new Quaternion(0, 0, 0, 0);
+        }
+        GameObject p4 = GameObject.Find("player four");
+        if (p4 != null)
+        {
+            p4.transform.position = new Vector2(net_position.position.x - 3, net_position.position.y);
+            p4.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            p4.GetComponent<Rigidbody2D>().angularVelocity = 0f;
+            p4.transform.rotation = new Quaternion(0, 0, 0, 0);
+        }
+
     }
 
 

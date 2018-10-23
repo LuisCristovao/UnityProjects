@@ -168,7 +168,7 @@ Prefab:
     - target: {fileID: 224309184792421262, guid: 8d882e41e9790724fa3b8aee2aa3ffd9,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 193.7
+      value: 222.3
       objectReference: {fileID: 0}
     - target: {fileID: 224309184792421262, guid: 8d882e41e9790724fa3b8aee2aa3ffd9,
         type: 2}
@@ -891,12 +891,12 @@ Prefab:
     - target: {fileID: 224309184792421262, guid: 8d882e41e9790724fa3b8aee2aa3ffd9,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 20.4
+      value: 19.7
       objectReference: {fileID: 0}
     - target: {fileID: 224309184792421262, guid: 8d882e41e9790724fa3b8aee2aa3ffd9,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 135.9
+      value: 168.1
       objectReference: {fileID: 0}
     - target: {fileID: 224309184792421262, guid: 8d882e41e9790724fa3b8aee2aa3ffd9,
         type: 2}
@@ -1288,7 +1288,7 @@ MonoBehaviour:
     m_Alignment: 1
     m_AlignByGeometry: 0
     m_RichText: 1
-    m_HorizontalOverflow: 0
+    m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 0 | 0
