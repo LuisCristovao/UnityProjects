@@ -56,6 +56,13 @@ public class MenuGame : MonoBehaviour
     }
 
 
+    private void Update()
+    {
+        
+    }
+
+
+
     void Action(string message)
     {
 
@@ -126,6 +133,7 @@ public class MenuGame : MonoBehaviour
             if (decision == "player vs player")
             {
                 GameObject player_one = Instantiate(Player, new Vector2(net_position.position.x + 1, net_position.position.y), Quaternion.identity);
+                player_one.name = "player one";
                 //player_one.GetComponent<SpriteRenderer>().color = new Color(Random.value, Random.value, Random.value,1.0f);
                 player_one.GetComponent<SpriteRenderer>().color = new Color(1.0f, 0.09558821f, 0.09558821f, 1.0f);
                 player_one.GetComponent<Player>().jump_key = input_keys["player_one_jump_key"].GetComponentInChildren<InputField>().text;
@@ -133,6 +141,7 @@ public class MenuGame : MonoBehaviour
                 player_one.GetComponent<Player>().left_key = input_keys["player_one_left_key"].GetComponentInChildren<InputField>().text;
 
                 GameObject player_two = Instantiate(Player, new Vector2(net_position.position.x - 1, net_position.position.y), Quaternion.identity);
+                player_two.name = "player two";
                 //player_two.GetComponent<SpriteRenderer>().color = new Color(Random.value, Random.value, Random.value, 1.0f);
                 player_two.GetComponent<SpriteRenderer>().color = new Color(0, 0.5367647f, 0.2924442f, 1.0f); ;
                 player_two.GetComponent<Player>().jump_key = input_keys["player_two_jump_key"].GetComponentInChildren<InputField>().text;
