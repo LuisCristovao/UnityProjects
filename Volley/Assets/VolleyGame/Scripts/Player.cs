@@ -6,14 +6,14 @@ public class Player : MonoBehaviour {
 
     Rigidbody2D rb;
     public int jump_force=1000;
-    public int walk_force=200;
-    public int help_walk_force=100;
-
+    public int walk_force=20;
+    public int help_walk_force=10;
+    public float downwards_speed = 1;
 
     public string jump_key = "up";
     public string left_key = "left";
     public string right_key = "right";
-
+    float press_time = 0;
     //public GameObject floor;
 
     private bool on_air;
@@ -28,25 +28,34 @@ public class Player : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        //Time.timeScale = timespeed;
 
-        if (Input.GetKeyDown(jump_key) && !on_air)
+
+        if (Input.GetKey(jump_key) && on_air)
+        {
+            rb.velocity = new Vector2(rb.velocity.x , rb.velocity.y+downwards_speed * Time.timeScale);
+            //Debug.Log(rb.velocity);
+        }
+
+
+            if (Input.GetKeyDown(jump_key) && !on_air)
         {
             rb.AddForce(new Vector2(0, jump_force));
             gameObject.transform.rotation = new Quaternion(0, 0, 0, 0);
             on_air = true;
+           
             //print("up arrow key is held down");
         }
+        
 
         if (Input.GetKey(left_key))
         {
             if (!on_air)
             {
-                rb.AddForce(new Vector2(-walk_force, help_walk_force*Time.timeScale));
+                rb.AddForce(new Vector2(-walk_force * Time.timeScale, help_walk_force*Time.timeScale));
             }
             else
             {
-                rb.AddForce(new Vector2(-walk_force, 0));
+                rb.AddForce(new Vector2(-walk_force * Time.timeScale, 0));
             }
             
             //print("left arrow key is held down");
@@ -56,15 +65,25 @@ public class Player : MonoBehaviour {
         {
             if (!on_air)
             {
-                rb.AddForce(new Vector2(walk_force, help_walk_force * Time.timeScale));
+                rb.AddForce(new Vector2(walk_force * Time.timeScale, help_walk_force * Time.timeScale));
             }
             else
             {
-                rb.AddForce(new Vector2(walk_force, 0));
+                rb.AddForce(new Vector2(walk_force * Time.timeScale, 0));
             }
             //print("right arrow key is held down");
         }
-        
+
+
+
+        if (on_air)
+        {
+            rb.velocity = new Vector2(rb.velocity.x , rb.velocity.y-downwards_speed * Time.timeScale);
+        }
+
+
+
+
     }
 
 

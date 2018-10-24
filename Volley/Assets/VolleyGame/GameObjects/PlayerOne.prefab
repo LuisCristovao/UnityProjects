@@ -100,8 +100,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jump_force: 1000
-  walk_force: 10
-  help_walk_force: 20
+  walk_force: 20
+  help_walk_force: 10
   jump_key: up
   left_key: left
   right_key: right
