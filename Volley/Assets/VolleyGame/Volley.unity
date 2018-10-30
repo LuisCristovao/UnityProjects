@@ -1538,6 +1538,11 @@ Prefab:
       propertyPath: net_position
       value: 
       objectReference: {fileID: 1524132735}
+    - target: {fileID: 50027842498885578, guid: f587f175f5c736a49a2844b1d92e4c29,
+        type: 2}
+      propertyPath: m_Mass
+      value: 0.1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f587f175f5c736a49a2844b1d92e4c29, type: 2}
   m_IsPrefabParent: 0

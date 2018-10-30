@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
+
 public class Ball : MonoBehaviour {
     private const float V = 0.02f;
     Vector2 start_pos;
@@ -28,11 +29,13 @@ public class Ball : MonoBehaviour {
         game_over = false;
         start_pos = transform.position;
         rb = gameObject.GetComponent<Rigidbody2D>();
-        
 
-        PhysicsMaterial2D ball_bounciness = new PhysicsMaterial2D("bounce");
-        ball_bounciness.bounciness = bounce;
-        ball_bounciness.friction = 0.4f;
+
+        PhysicsMaterial2D ball_bounciness = new PhysicsMaterial2D("bounce")
+        {
+            bounciness = bounce,
+            friction = 0.4f
+        };
 
         gameObject.GetComponent<Collider2D>().sharedMaterial = ball_bounciness;
 
@@ -50,9 +53,11 @@ public class Ball : MonoBehaviour {
     void Update() {
         Time.timeScale = timespeed;
         //Time.fixedDeltaTime = Time.timeScale*V;
-        PhysicsMaterial2D ball_bounciness = new PhysicsMaterial2D("bounce");
-        ball_bounciness.bounciness = bounce;
-        ball_bounciness.friction = 0.4f;
+        PhysicsMaterial2D ball_bounciness = new PhysicsMaterial2D("bounce")
+        {
+            bounciness = bounce,
+            friction = 0.4f
+        };
         gameObject.GetComponent<Collider2D>().sharedMaterial = ball_bounciness;
        
 
@@ -183,7 +188,7 @@ public class Ball : MonoBehaviour {
             rb.velocity = new Vector2(0, 0);
             rb.angularVelocity=0f;
             ChangeResult("g", 1);
-           
+            ChangePhysics();
         }
 
         if (col.gameObject.name == "team_green_floor")
@@ -192,10 +197,93 @@ public class Ball : MonoBehaviour {
             rb.velocity = new Vector2(0, 0);
             rb.angularVelocity = 0f;
             ChangeResult("r", 1);
-            
+            ChangePhysics();
         }
 
       
 
     }
+
+
+    void ChangePhysics()
+    {
+        float n = UnityEngine.Random.value;
+        float options = (1f / 6f);
+        int index = 1;
+        //timespeed = 1;
+        //first option
+        if (n <= options)
+        {
+            //change boucinnes
+            bounce = UnityEngine.Random.Range(0,1f);
+        }
+        //second option
+        if (n>options*index && n <= options * (index+1))
+        {
+            print("change ball mass");
+            rb.mass = UnityEngine.Random.Range(0, 1.3f);
+        }
+        index++;
+        //third option
+        if (n > options * index && n <= options * (index + 1))
+        {
+            print("change ball gravity");
+            rb.gravityScale= Mathf.Round(UnityEngine.Random.Range(1, 4));
+        }
+        index++;
+        //fourth option
+        if (n > options * index && n <= options * (index + 1))
+        {
+            print("change players speed");
+            List<GameObject> players = GetPlayers();
+            float r = UnityEngine.Random.Range(20, 30);
+            foreach (GameObject player in players)
+            {
+                
+                player.GetComponent<Player>().walk_force = (int)r;
+            }
+        }
+        index++;
+        //fifth option
+        if (n > options * index && n <= options * (index + 1))
+        {
+            print("change players gravity");
+            List<GameObject> players = GetPlayers();
+            float r = Mathf.Round(UnityEngine.Random.Range(1, 4));
+            foreach (GameObject player in players)
+            {
+                
+                player.GetComponent<Rigidbody2D>().gravityScale = r;
+            }
+        }
+        index++;
+        //six option
+        if (n > options * index && n <= options * (index + 1))
+        {
+            print("slow motion");
+            timespeed = UnityEngine.Random.Range(0.1f, 1);
+        }
+        
+
+    }
+
+    List<GameObject> GetPlayers()
+    {
+        List<GameObject> players = new List<GameObject>();
+        players.Add(GameObject.Find("player one"));
+        players.Add(GameObject.Find("player two"));
+        GameObject p = GameObject.Find("player three");
+        if (p != null)
+        {
+            players.Add(p);
+        }
+        p = GameObject.Find("player four");
+        if (p != null)
+        {
+            players.Add(p);
+        }
+        return players;
+    }
+
+    
 }
