@@ -17,13 +17,15 @@ public class MenuGame : MonoBehaviour
     private Ball script;
     private GameObject canvas;
     private Dictionary<string, GameObject> input_keys;
+    private Rect normal_mode, crazy_mode;
+
 
     public GameObject Player;
     public Transform net_position;
 
 
     public GameObject InputPrefab;
-
+    public GameObject toggle_prefab;
 
 
     void Start()
@@ -86,7 +88,8 @@ public class MenuGame : MonoBehaviour
                 {"player_two_right_key", Instantiate(InputPrefab)},
                 {"player_two_left_key", Instantiate(InputPrefab)},
 
-                {"number_of_matches", Instantiate(InputPrefab)}
+                {"number_of_matches", Instantiate(InputPrefab)},
+                {"crazy_mode",Instantiate(toggle_prefab)}
 
             };
 
@@ -101,6 +104,11 @@ public class MenuGame : MonoBehaviour
             input_keys["number_of_matches"].GetComponentInChildren<Text>().text = "Number of Matches";
             input_keys["number_of_matches"].GetComponentInChildren<InputField>().text = "3";
 
+
+
+            input_keys["crazy_mode"].transform.position = new Vector2(input_keys["number_of_matches"].transform.position.x, input_keys["number_of_matches"].transform.position.y + 100);
+            input_keys["crazy_mode"].GetComponentInChildren<Text>().text = "Crazy Mode";
+            input_keys["crazy_mode"].GetComponent<Toggle>().isOn= false;
 
 
             input_keys["player_two_jump_key"].transform.position = new Vector3((Screen.width / 2) - 350, (Screen.height / 2) + 220, 0);
@@ -130,8 +138,7 @@ public class MenuGame : MonoBehaviour
             input_keys["player_one_left_key"].GetComponentInChildren<Text>().text = "player one left key";
             input_keys["player_one_left_key"].GetComponentInChildren<InputField>().text = "left";
 
-
-
+           
 
 
         }
@@ -164,7 +171,8 @@ public class MenuGame : MonoBehaviour
                 {"player_four_right_key", Instantiate(InputPrefab)},
                 {"player_four_left_key", Instantiate(InputPrefab)},
 
-                {"number_of_matches", Instantiate(InputPrefab)}
+                {"number_of_matches", Instantiate(InputPrefab)},
+                {"crazy_mode",Instantiate(toggle_prefab)}
 
             };
 
@@ -178,6 +186,13 @@ public class MenuGame : MonoBehaviour
             input_keys["number_of_matches"].transform.position = new Vector2(OK.transform.position.x,OK.transform.position.y+ 50);
             input_keys["number_of_matches"].GetComponentInChildren<Text>().text = "Number of Matches";
             input_keys["number_of_matches"].GetComponentInChildren<InputField>().text = "3";
+
+
+            input_keys["crazy_mode"].transform.position = new Vector2(input_keys["number_of_matches"].transform.position.x, input_keys["number_of_matches"].transform.position.y + 100);
+            input_keys["crazy_mode"].GetComponentInChildren<Text>().text = "Crazy Mode";
+            input_keys["crazy_mode"].GetComponent<Toggle>().isOn = false;
+
+
 
             input_keys["player_two_jump_key"].transform.position = new Vector3((Screen.width / 2) - 350, (Screen.height / 2) + 220, 0);
             input_keys["player_two_jump_key"].GetComponentInChildren<Text>().text = "player two jump key";
@@ -316,8 +331,16 @@ public class MenuGame : MonoBehaviour
 
 
 
-            GameObject.Find("Ball").GetComponent<Ball>().winning_matches = int.Parse( input_keys["number_of_matches"].GetComponentInChildren<InputField>().text);
-
+            script.winning_matches = int.Parse( input_keys["number_of_matches"].GetComponentInChildren<InputField>().text);
+            //if crazy mode
+            if (input_keys["crazy_mode"].GetComponent<Toggle>().isOn)
+            {
+                script.crazy_mode = true;
+            }
+            else
+            {
+                script.crazy_mode = false;
+            }
 
             //Destroy inputs created
             foreach (KeyValuePair<string, GameObject> entry in input_keys)
@@ -325,79 +348,25 @@ public class MenuGame : MonoBehaviour
                 Destroy(entry.Value);
             }
 
-
+            
 
             //print(message);
             decision = message;
             Hide();
             script.timespeed = 1;
 
-
+           
 
         }
 
 
 
-
-        //if(message == "player vs player")
-        //{
-        //    GameObject player_one =Instantiate(Player, new Vector2(net_position.position.x + 1, net_position.position.y), Quaternion.identity);
-        //    //player_one.GetComponent<SpriteRenderer>().color = new Color(Random.value, Random.value, Random.value,1.0f);
-        //    player_one.GetComponent<SpriteRenderer>().color = new Color(1.0f, 0.09558821f, 0.09558821f, 1.0f);
-
-        //    GameObject player_two = Instantiate(Player, new Vector2(net_position.position.x - 1, net_position.position.y), Quaternion.identity);
-        //    //player_two.GetComponent<SpriteRenderer>().color = new Color(Random.value, Random.value, Random.value, 1.0f);
-        //    player_two.GetComponent<SpriteRenderer>().color = new Color(0, 0.5367647f, 0.2924442f, 1.0f); ;
-        //    player_two.GetComponent<Player>().jump_key = "w";
-        //    player_two.GetComponent<Player>().right_key = "d";
-        //    player_two.GetComponent<Player>().left_key = "a";
-
-        //    //print(message);
-        //    decision = message;
-        //    Hide();
-        //    script.timespeed = 1;
-        //}
-
-        //if (message == "team vs team")
-        //{
-        //    GameObject player_one = Instantiate(Player, new Vector2(net_position.position.x + 1, net_position.position.y), Quaternion.identity);
-        //    //player_one.GetComponent<SpriteRenderer>().color = new Color(Random.value, Random.value, Random.value,1.0f);
-        //    player_one.GetComponent<SpriteRenderer>().color = new Color(1.0f, 0.09558821f, 0.09558821f, 1.0f);
-
-        //    GameObject player_two = Instantiate(Player, new Vector2(net_position.position.x - 1, net_position.position.y), Quaternion.identity);
-        //    //player_two.GetComponent<SpriteRenderer>().color = new Color(Random.value, Random.value, Random.value, 1.0f);
-        //    player_two.GetComponent<SpriteRenderer>().color = new Color(0, 0.5367647f, 0.2924442f, 1.0f); ;
-        //    player_two.GetComponent<Player>().jump_key = "w";
-        //    player_two.GetComponent<Player>().right_key = "d";
-        //    player_two.GetComponent<Player>().left_key = "a";
-
-        //    GameObject player_three = Instantiate(Player, new Vector2(net_position.position.x + 3, net_position.position.y), Quaternion.identity);
-        //    //player_two.GetComponent<SpriteRenderer>().color = new Color(Random.value, Random.value, Random.value, 1.0f);
-        //    player_three.GetComponent<SpriteRenderer>().color = new Color(1.0f, 0.6262409f, 0.09411764f, 1.0f); ;
-        //    player_three.GetComponent<Player>().jump_key = "o";
-        //    player_three.GetComponent<Player>().right_key = "p";
-        //    player_three.GetComponent<Player>().left_key = "i";
-
-
-
-        //    GameObject player_four = Instantiate(Player, new Vector2(net_position.position.x - 3, net_position.position.y), Quaternion.identity);
-        //    //player_two.GetComponent<SpriteRenderer>().color = new Color(Random.value, Random.value, Random.value, 1.0f);
-        //    player_four.GetComponent<SpriteRenderer>().color = new Color(0.01348342f, 0.7637295f, 0.9528302f, 1.0f); ;
-        //    player_four.GetComponent<Player>().jump_key = "b";
-        //    player_four.GetComponent<Player>().right_key = "n";
-        //    player_four.GetComponent<Player>().left_key = "v";
-
-
-
-
-
-        //    //print(message);
-        //    decision = message;
-        //    Hide();
-        //    script.timespeed = 1;
-        //}
-
     }
+
+
+   
+
+
 
 
     void Hide()

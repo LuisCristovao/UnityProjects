@@ -17,16 +17,17 @@ public class Ball : MonoBehaviour {
     public Button restart;
     public Button main_menu;
     public Transform net_position;
+    public bool crazy_mode;
+
+    public GameObject info_text;
 
 
-
-
-
-    
+    private float wait_time = 2.5f;
     private bool game_over;
     // Use this for initialization
     void Start() {
         game_over = false;
+        crazy_mode = false;
         start_pos = transform.position;
         rb = gameObject.GetComponent<Rigidbody2D>();
 
@@ -43,7 +44,7 @@ public class Ball : MonoBehaviour {
         main_menu.onClick.AddListener(delegate { MainMenu(); });
         restart.gameObject.SetActive(false);
         main_menu.gameObject.SetActive(false);
-
+        info_text.SetActive(false);
 
 
 
@@ -188,7 +189,11 @@ public class Ball : MonoBehaviour {
             rb.velocity = new Vector2(0, 0);
             rb.angularVelocity=0f;
             ChangeResult("g", 1);
-            ChangePhysics();
+            if (crazy_mode)
+            {
+                ChangePhysics();
+            }
+            
         }
 
         if (col.gameObject.name == "team_green_floor")
@@ -197,7 +202,10 @@ public class Ball : MonoBehaviour {
             rb.velocity = new Vector2(0, 0);
             rb.angularVelocity = 0f;
             ChangeResult("r", 1);
-            ChangePhysics();
+            if (crazy_mode)
+            {
+                ChangePhysics();
+            }
         }
 
       
@@ -214,29 +222,41 @@ public class Ball : MonoBehaviour {
         //first option
         if (n <= options)
         {
-            //change boucinnes
-            bounce = UnityEngine.Random.Range(0,1f);
+            //print("change boucinnes");
+            float value= UnityEngine.Random.Range(0, 1f);
+            string text = "Change Ball Bounciness: "+value;
+            StartCoroutine(HideAfterSeconds(wait_time, info_text, text));
+            bounce = value;
         }
         //second option
         if (n>options*index && n <= options * (index+1))
         {
-            print("change ball mass");
-            rb.mass = UnityEngine.Random.Range(0, 1.3f);
+            //print("change ball mass");
+            float value = UnityEngine.Random.Range(0, 1.3f); ;
+            string text = "Change Ball Mass: " + value;
+            StartCoroutine(HideAfterSeconds(wait_time, info_text, text));
+            rb.mass = value;
         }
         index++;
         //third option
         if (n > options * index && n <= options * (index + 1))
         {
-            print("change ball gravity");
-            rb.gravityScale= Mathf.Round(UnityEngine.Random.Range(1, 4));
+            //print("change ball gravity");
+            float value = Mathf.Round(UnityEngine.Random.Range(1, 4));
+            string text = "Change Ball Mass: " + value;
+            StartCoroutine(HideAfterSeconds(wait_time, info_text, text));
+            rb.gravityScale= value;
         }
         index++;
         //fourth option
         if (n > options * index && n <= options * (index + 1))
         {
-            print("change players speed");
+            //print("change players speed");
+            float r = UnityEngine.Random.Range(20, 30); 
+            string text = "Change Players Speed: " + r;
+            StartCoroutine(HideAfterSeconds(wait_time, info_text, text));
             List<GameObject> players = GetPlayers();
-            float r = UnityEngine.Random.Range(20, 30);
+            
             foreach (GameObject player in players)
             {
                 
@@ -247,9 +267,11 @@ public class Ball : MonoBehaviour {
         //fifth option
         if (n > options * index && n <= options * (index + 1))
         {
-            print("change players gravity");
+            //print("change players gravity");
             List<GameObject> players = GetPlayers();
             float r = Mathf.Round(UnityEngine.Random.Range(1, 4));
+            string text = "Change Players Gravity: " + r;
+            StartCoroutine(HideAfterSeconds(wait_time, info_text, text));
             foreach (GameObject player in players)
             {
                 
@@ -260,12 +282,19 @@ public class Ball : MonoBehaviour {
         //six option
         if (n > options * index && n <= options * (index + 1))
         {
-            print("slow motion");
-            timespeed = UnityEngine.Random.Range(0.1f, 1);
+            //print("slow motion");
+            float value = UnityEngine.Random.Range(0.1f, 1);
+            string text = "Change Time Speed: " + value;
+            StartCoroutine(HideAfterSeconds(wait_time, info_text, text));
+            timespeed = value;
         }
         
 
     }
+
+
+
+
 
     List<GameObject> GetPlayers()
     {
@@ -285,5 +314,17 @@ public class Ball : MonoBehaviour {
         return players;
     }
 
-    
+
+    IEnumerator HideAfterSeconds(float seconds,GameObject obj,string text)
+    {
+        obj.SetActive(true);
+        obj.GetComponent<Text>().text = text;
+        yield return new WaitForSeconds(seconds);
+        obj.SetActive(false);
+    }
+
+
+
+
+
 }
